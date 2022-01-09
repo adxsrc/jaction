@@ -21,6 +21,8 @@ from jax import numpy as np
 from jax import grad, jacfwd, jit
 from jax.numpy.linalg import inv
 
+from xaj import odeint
+
 
 def ELrhs(L):
 
@@ -38,3 +40,7 @@ def ELrhs(L):
         return np.array([v, a])
 
     return rhs
+
+
+def Path(L, x0, v0, h):
+    return odeint(ELrhs(L), x0, v0, h)
