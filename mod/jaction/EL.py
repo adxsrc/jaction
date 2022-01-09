@@ -17,4 +17,24 @@
 # along with jaction.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from .EL import ELrhs
+from jax import numpy as np
+from jax import grad, jacfwd, jit
+from jax.numpy.linalg import inv
+
+
+def ELrhs(L):
+
+    Lx = grad(L, argnums=1)
+    Lv = grad(L, argnums=2)
+
+    Lvt = jacfwd(Lv, argnums=(0,1,2))
+
+    @jit
+    def rhs(t, xv):
+        x = xv[0,:]
+        v = xv[1,:]
+        d = Lvt(t, x, v)
+        a = inv(d[2]) @ (Lx(t, x, v) - d[0] - v @ d[1])
+        return np.array([v, a])
+
+    return rhs
