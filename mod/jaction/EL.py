@@ -42,5 +42,5 @@ def ELrhs(L):
     return rhs
 
 
-def Path(L, x0, v0, h):
-    return odeint(ELrhs(L), x0, v0, h)
+def Path(L, x0, v0, h, **kwargs):
+    return odeint(ELrhs(L), x0, v0, h, **kwargs)
