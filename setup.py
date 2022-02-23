@@ -24,7 +24,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='jaction',
-    version='0.1.0',
+    version='0.1.1',
     url='https://github.com/adxsrc/jaction',
     author='Chi-kwan Chan',
     author_email='chanc@arizona.edu',
@@ -33,6 +33,6 @@ setup(
     package_dir={'': 'mod'},
     python_requires='>=3.7',
     install_requires=[
-        'xaj',
+        'xaj==0.1.1',
     ],
 )
